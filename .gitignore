@@ -1,0 +1,66 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+# *.bat
+
+.metadata/*
+.recommenders/*
+.idea/*
+.settings/*
+bin/*
+
+
+pids
+logs
+results
+
+npm-debug.log
+node_modules/
+
+#fish dir
+
+cms/*
+.idea/*
+egret_one/.idea/*
+egret_one/*idea
+egret_one/*wing/
+egret_one/release/*
+egret_one/bin-debug/*
+egret_one/libs/modules/*
+egret_one/libs/exml.e.d.ts
+egret_one/bin-release/*
+egret_one/buildlog.txt
+egret_one/resource/readme.txt
+egret_one/login/*
+egret_one/wingProperties.json
+egret_one/libs/exml*
+builders/tinypng/images/.tinypng-sigs
+# build dir
+build/
+tool/configBaseDir.js
+
+# release dir
+dest/
+
+# builder dir
+builders/release_wan/
+builders/debug_wan/
+builders/debug_lan/
+builders/gulp/release_wan/
+builders/gulp/node_modules/
+builders/tinypng/images/src/
+builders/tinypng/images/dist/
+builders/tinypng/images/.tinypng-sigs
+builders/tinypng/images/.tinypng-sigs
+builders/tinypng/node_modules/
+
+# app dir
+app_one/*
+
+tool/configBaseDir.js
