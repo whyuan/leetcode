@@ -43,4 +43,5 @@ public class Solution {
 		Solution solution = new Solution();
 		System.out.println(solution.generateTrees(3));
 	}
+	
 }
