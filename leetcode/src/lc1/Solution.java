@@ -1,6 +1,8 @@
 /**
  * Created by wanghaoyuan on 2016/7/25.
  */
+package lc1;
+
 public class Solution {
     public int[] twoSum(int[] nums, int target) {
         int[] result = {};
