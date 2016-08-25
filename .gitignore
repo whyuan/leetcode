@@ -13,7 +13,7 @@ lib-cov
 .recommenders/*
 .idea/*
 .settings/*
-bin/*
+leetcode/bin/*
 
 
 pids
