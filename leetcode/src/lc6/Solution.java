@@ -1,3 +1,4 @@
+package lc6;
 /**
  * Created by wanghaoyuan on 2016/7/28.
  */

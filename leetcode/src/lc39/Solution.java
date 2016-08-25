@@ -1,3 +1,5 @@
+package lc39;
+
 import java.util.List;
 import java.util.Arrays;
 import java.util.Collections;

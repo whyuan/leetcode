@@ -1,3 +1,5 @@
+package lc38;
+
 public class Solution {
     public String countAndSay(int n) {
     	if (n <= 0) return "";

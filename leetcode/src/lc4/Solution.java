@@ -1,3 +1,5 @@
+package lc4;
+
 /**
  * Created by wanghaoyuan on 2016/7/27.
  */
@@ -31,7 +33,7 @@ public class Solution {
                 p = ns2.length-1;
             }
 
-            // ´¦Àí±ß½çÎÊÌâ
+            // ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (p >= h2 && p-h2+l+1 >= total) {
                 pos = total-l+h2-1;
                 if ((ns1.length+ns2.length)%2 == 0) {

@@ -1,3 +1,4 @@
+package lc68;
 
 import java.util.*;
 public class Solution {

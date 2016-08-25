@@ -1,3 +1,5 @@
+package lc30;
+
 import java.util.*;
 
 public class Solution {
