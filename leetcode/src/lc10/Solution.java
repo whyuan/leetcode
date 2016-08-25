@@ -1,3 +1,5 @@
+package lc10;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -67,17 +69,17 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        System.out.println(solution.isMatch("ab", ".*c"));// ¡ú false
-        System.out.println(solution.isMatch("aaa", "baabaaa"));// ¡ú false
-        System.out.println(solution.isMatch("aa", "a*"));// ¡ú true
-        System.out.println(solution.isMatch("aaa","ab*ac*a"));// ¡ú true
-        System.out.println(solution.isMatch("aa","a"));// ¡ú false
-        System.out.println(solution.isMatch("aa","aa"));// ¡ú true
-        System.out.println(solution.isMatch("aaa","aa"));// ¡ú false
-        System.out.println(solution.isMatch("aa", "a*"));// ¡ú true
-        System.out.println(solution.isMatch("aa", ".*"));// ¡ú true
-        System.out.println(solution.isMatch("ab", ".*"));// ¡ú true
-        System.out.println(solution.isMatch("aab", "c*a*b"));// ¡ú true
+        System.out.println(solution.isMatch("ab", ".*c"));// ï¿½ï¿½ false
+        System.out.println(solution.isMatch("aaa", "baabaaa"));// ï¿½ï¿½ false
+        System.out.println(solution.isMatch("aa", "a*"));// ï¿½ï¿½ true
+        System.out.println(solution.isMatch("aaa","ab*ac*a"));// ï¿½ï¿½ true
+        System.out.println(solution.isMatch("aa","a"));// ï¿½ï¿½ false
+        System.out.println(solution.isMatch("aa","aa"));// ï¿½ï¿½ true
+        System.out.println(solution.isMatch("aaa","aa"));// ï¿½ï¿½ false
+        System.out.println(solution.isMatch("aa", "a*"));// ï¿½ï¿½ true
+        System.out.println(solution.isMatch("aa", ".*"));// ï¿½ï¿½ true
+        System.out.println(solution.isMatch("ab", ".*"));// ï¿½ï¿½ true
+        System.out.println(solution.isMatch("aab", "c*a*b"));// ï¿½ï¿½ true
     }
 }
 

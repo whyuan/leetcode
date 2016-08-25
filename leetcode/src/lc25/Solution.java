@@ -1,3 +1,7 @@
+package lc25;
+
+import common.ListNode;
+
 public class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
         if (head == null) return head;

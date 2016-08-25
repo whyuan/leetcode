@@ -1,3 +1,5 @@
+package lc28;
+
 public class Solution {
     public int strStr(String haystack, String needle) {
         int l0 = haystack.length();

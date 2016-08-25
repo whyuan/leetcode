@@ -1,3 +1,5 @@
+package lc66;
+
 public class Solution {
     public int[] plusOne(int[] digits) {
         boolean allNine = true;

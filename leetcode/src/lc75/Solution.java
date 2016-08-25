@@ -1,3 +1,5 @@
+package lc75;
+
 public class Solution {
     public void sortColors(int[] nums) {
         int[] a = new int[]{0, 0, 0}; 

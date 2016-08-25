@@ -1,3 +1,4 @@
+package lc3;
 
 public class Solution {
     public int lengthOfLongestSubstring(String s) {

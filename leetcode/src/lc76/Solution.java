@@ -1,3 +1,5 @@
+package lc76;
+
 import java.util.HashMap;
 
 public class Solution {

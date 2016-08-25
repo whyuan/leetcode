@@ -1,3 +1,4 @@
+package lc11;
 
 public class Solution {
     public int maxArea(int[] height) {

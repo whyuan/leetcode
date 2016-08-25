@@ -1,3 +1,5 @@
+package lc2;
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {

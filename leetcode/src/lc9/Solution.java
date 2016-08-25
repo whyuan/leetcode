@@ -1,3 +1,5 @@
+package lc9;
+
 import java.util.LinkedList;
 
 /**

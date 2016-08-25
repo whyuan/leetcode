@@ -1,3 +1,5 @@
+package lc7;
+
 /**
  * Created by wanghaoyuan on 2016/7/29.
  */

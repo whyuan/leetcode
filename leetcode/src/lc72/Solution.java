@@ -1,3 +1,5 @@
+package lc72;
+
 public class Solution {
     public int minDistance(String word1, String word2) {
         if (word1 == null || word1.length() == 0) {

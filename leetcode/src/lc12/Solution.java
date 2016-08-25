@@ -1,3 +1,5 @@
+package lc12;
+
 /**
  * Created by wanghaoyuan on 2016/8/3.
  */
