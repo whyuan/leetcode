@@ -3,13 +3,13 @@ package lc98;
 import common.TreeNode;
 
 public class Solution {
-	private int preVal = Integer.MIN_VALUE;
+	private Integer preVal;
     public boolean isValidBST(TreeNode root) {
     	if (root == null) return true;
 		if (!isValidBST(root.left)) {
 			return false;
 		}
-		if (preVal > root.val)
+		if (preVal != null && preVal >= root.val)
 			return false;
 		preVal = root.val;
 		return isValidBST(root.right);
