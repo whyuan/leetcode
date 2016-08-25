@@ -33,7 +33,6 @@ public class Solution {
 		return true;
 	}
 
-
     public boolean isSymmetric0(TreeNode root) {
         if (root == null) return true;
         else return f(root.left, root.right);
