@@ -3,7 +3,20 @@ package lc123;
 import java.util.*;
 
 public class Solution {
-    public int maxProfit(int[] prices) {
+	public int maxProfit(int[] prices) {
+    	if (prices == null || prices.length == 0) return 0;
+		int firstBuy, firstSell, secondBuy, secondSell;
+		firstBuy = firstSell = secondBuy = secondSell = Integer.MIN_VALUE;
+		for (int price : prices) {
+			if (-price > firstBuy) firstBuy = -price; 
+			if (firstBuy+price > firstSell) firstSell = firstBuy+price;
+			if (firstSell-price > secondBuy) secondBuy = firstSell-price;
+			if (secondBuy+price > secondSell) secondSell = secondBuy+price;
+		}
+		return secondSell;
+	}
+	
+    public int maxProfit1(int[] prices) {
     	if (prices == null || prices.length == 0) return 0;
         int min = Integer.MAX_VALUE, max = 0, cur = 0;
         int[] f0 = new int[prices.length];
