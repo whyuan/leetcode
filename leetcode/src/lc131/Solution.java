@@ -3,32 +3,48 @@ package lc131;
 import java.util.*;
 
 public class Solution {
-    public boolean isPalindrome(String s) {
-    	if (s == null || s.length() == 0) return true;
-    	int h = 0, t = s.length()-1;
-    	s = s.toLowerCase();
-    	while (h < t) {
-    		while ((s.charAt(h) < 'a' || s.charAt(h) > 'z') && (s.charAt(h) < '0' || s.charAt(h) > '9') && h < t) {
-    			h++;
-    		}
-    		while ((s.charAt(t) < 'a' || s.charAt(t) > 'z') && (s.charAt(t) < '0' || s.charAt(t) > '9') && h < t) {
-    			t--;
-    		}
-    		if (h < t && s.charAt(h) == s.charAt(t)) {
-    			h++;
-    			t--;
-    		} else if (h < t) {
-    			return false;
+    public List<List<String>> partition(String s) {
+    	List<List<String>> ss = new ArrayList<List<String>>();
+    	char[] cs = s.toCharArray();
+    	for (int i = 0; i < cs.length; i++) {
+    		List<String> cur = new ArrayList<String>();
+    		ss.add(cur);
+    		for (int j = 0; j <= i; j++) {
+    			boolean flag = false;
+    			for (int h = i-j, t = i; h <= t; h++, t--) {
+    				if (cs[h] != cs[t]) {
+    					flag = true;
+    					break;
+    				}
+    			}
+    			if (!flag) {
+    				cur.add(s.substring(i-j, i+1));
+    			}
     		}
     	}
-    	return true;
+    	return dfs(new ArrayList<List<String>>(), ss, new ArrayList<String>(), cs.length-1);
+    }
+    
+    private List<List<String>> dfs(List<List<String>> result, List<List<String>> ss, List<String> cur, int index) {
+    	if (index < 0) {
+    		List<String> aResult = new ArrayList(cur);
+    		Collections.reverse(aResult);
+    		result.add(aResult);
+    		return result;
+    	} else {
+    		List<String> strings = ss.get(index);
+    		for (int i = 0; i < strings.size(); i++) {
+    			String as = strings.get(i);
+    			cur.add(as);
+    			dfs(result, ss, cur, index-as.length());
+    			cur.remove(cur.size()-1);
+    		}
+    		return result;
+    	}
     }
     
     public static void main(String[] args) {
     	Solution solution = new Solution();
-    	System.out.println(solution.isPalindrome("A man, a plan, a canal: Panama"));
-    	System.out.println(solution.isPalindrome(""));
-    	System.out.println(solution.isPalindrome("0P"));
-    	System.out.println(solution.isPalindrome("race a car"));
+    	System.out.println(solution.partition("aab"));
     }
 }
