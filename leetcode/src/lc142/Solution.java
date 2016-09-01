@@ -4,19 +4,38 @@ import common.ListNode;
 import java.util.*;
 
 public class Solution {
-    public ListNode detectCycle(ListNode head) {
-    	if (head == null) return null;;
+	public ListNode detectCycle(ListNode head) {
+		if (head == null) return null;
+		ListNode node0 = head, node1 = head;
+		while (true) {
+			if (node0 == null || node0.next == null) return null;
+			node0 = node0.next.next;
+			node1 = node1.next;
+			if (node0 == node1) break;
+		}
+		node1 = head;
+		while (node0 != node1) {
+			node1 = node1.next;
+			node0 = node0.next;
+		}
+		return node1;
+	}
+
+    public ListNode detectCycle1(ListNode head) {
+    	if (head == null) return null;
         ListNode node0 = head, node1 = head, node2 = null;
         int step = 0;
         while (true) {
-        	if (node0 != null && node0.next != null) {
-        		node0 = node0.next.next;
-        	} else {
+        	if (!(node0 != null && node0.next != null)) {
         		return null;
         	}
+        	if (node0.next.next == node1.next) {
+        		if (node0.next != node1) return node1.next;
+        	}
+        	node0 = node0.next.next;
         	node1 = node1.next;
         	step++;
-        	if (node0 == node1) break;;
+        	if (node0 == node1) break;
         }
         int l = reverse(node0);
 		node1 = head;
@@ -25,7 +44,7 @@ public class Solution {
 			step++;
 		}
 		reverse(node0);
-		if (l != 0 && step % l == 0 && step > l) l = 0;
+
 		int a = (step-l)/2;
 		node1 = head;
 		for (int i = 0; i < a; i++) {
@@ -66,13 +85,13 @@ public class Solution {
     	a.next = b;
     	b.next = c;
     	c.next = d;
-    	d.next = e;
+    	d.next = b;
     	e.next = f;
     	f.next = g;
     	g.next = h;
     	h.next = i;
     	i.next = j;
-    	j.next = g;
+    	j.next = b;
     	System.out.println(solution.detectCycle(a).val);
     }
 }
