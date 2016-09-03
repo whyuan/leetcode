@@ -6,13 +6,15 @@ import java.util.*;
 public class Solution {
     public int maxPoints(Point[] points) {
     	if (points == null || points.length == 0) return 0;
+    	if (points.length <= 2) return points.length;
     	Map<Integer, Map<Integer, Integer>> map = new HashMap<Integer, Map<Integer, Integer>>();
     	int result = 0;
     	for (int i = 0; i < points.length; i++) {
     		map.clear();
-    		int overlap = 0;
+    		int overlap = 1;
     		int max = 0;
     		for (int j = i+1; j < points.length; j++) {
+    			if (j == i) continue;
     			int x = points[j].x-points[i].x;
     			int y = points[j].y-points[i].y;
     			if (x == 0 && y == 0) {

@@ -1,8 +1,7 @@
 package lc148;
 
-import java.util.*;
-
 import common.ListNode;
+import java.util.*;
 
 public class Solution {
     public ListNode sortList(ListNode head) {
