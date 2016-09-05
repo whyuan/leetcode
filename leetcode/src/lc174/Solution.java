@@ -6,33 +6,26 @@ public class Solution {
     public int calculateMinimumHP(int[][] dungeon) {
     	if (dungeon == null || dungeon.length == 0 || dungeon[0].length == 0) return 0;
     	int l0 = dungeon.length, l1 = dungeon[0].length;
-    	int[][] f = new int[l0+1][l1+1];
-    	int[][] accu = new int[l0+1][l1+1];
-    	for (int i = 0; i < l0+1; i++) {
-    		f[i][0] = 1;
-    		accu[i][0] = 1;
+    	int[][] f = new int[l0][l1];
+    	f[l0-1][l1-1] = Math.min(dungeon[l0-1][l1-1], 0);
+    	for (int i = l0-2; i >= 0; i--) {
+    		f[i][l1-1] = Math.min(f[i+1][l1-1]+dungeon[i][l1-1], 0);
     	}
-    	for (int i = 0; i < l1+1; i++) {
-    		f[0][i] = 1;
-    		accu[i][0] = 1;
+    	for (int i = l1-2; i >= 0; i--) {
+    		f[l0-1][i] = Math.min(f[l0-1][i+1]+dungeon[l0-1][i], 0);
     	}
-    	for (int i = 1; i < l0+1; i++) {
-    		for (int j = 1; j < l1+1; j++) {
-    			int prevI = i-1, prevJ = j;
-    			if (f[i-1][j] > f[i][j-1]) {
-    				prevI = i;
-    				prevJ = j-1;
+    	for (int i = l0-2; i >= 0; i--) {
+    		for (int j = l1-2; j >= 0; j--) {
+    			int preI = i+1, preJ = j;
+    			if (f[i+1][j] < f[i][j+1]) {
+    				preI = i;
+    				preJ = j+1;
     			}
-				if (accu[prevI][prevJ] + dungeon[i-1][j-1] <= 0) {
-					f[i][j] = f[prevI][prevJ] + 1 - (accu[prevI][prevJ] + dungeon[i-1][j-1]);
-					accu[i][j] = 1;
-				} else {
-					f[i][j] = f[prevI][prevJ];
-					accu[i][j] = accu[prevI][prevJ] + dungeon[i-1][j-1];
-				}
+//    			accu[i][j] = accu[preI][preJ]+dungeon[i][j];
+    			f[i][j] = Math.min(f[preI][preJ]+dungeon[i][j], 0);
     		}
     	}
-    	return f[l0][l1];
+    	return 1-f[0][0];
     }
     
     public static void main(String[] args) {
