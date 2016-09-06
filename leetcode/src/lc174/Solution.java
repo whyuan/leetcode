@@ -21,7 +21,6 @@ public class Solution {
     				preI = i;
     				preJ = j+1;
     			}
-//    			accu[i][j] = accu[preI][preJ]+dungeon[i][j];
     			f[i][j] = Math.min(f[preI][preJ]+dungeon[i][j], 0);
     		}
     	}
