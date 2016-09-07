@@ -5,8 +5,10 @@ import java.util.*;
 public class Solution {
     public boolean isHappy(int n) {
     	if (n == 1) return true;
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        map.put(n, 1);
+//        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+    	List<Integer> list = new ArrayList<Integer>();
+//        map.put(n, 1);
+    	list.add(n);
         while (true) {
         	int newN = 0;
         	while (n > 0) {
@@ -17,10 +19,10 @@ public class Solution {
         	n = newN;
         	if (n == 1) {
         		return true;
-        	} else if (map.containsKey(n)) {
+        	} else if (list.contains(n)) {
         		return false;
         	} else {
-        		map.put(n, 1);
+        		list.add(n);
         	}
         }
     }
