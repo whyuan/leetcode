@@ -1,13 +1,15 @@
-package lc207;
+package lc210;
 
 import java.util.*;
 
 public class Solution {
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
-    	if (numCourses == 0 || prerequisites == null || prerequisites.length == 0) return true;
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+    	if (numCourses == 0) return new int[]{};
     	int[] preNums = new int[numCourses];
     	boolean[][] p = new boolean[numCourses][numCourses];
     	boolean[] visited = new boolean[numCourses];
+    	int[] result = new int[numCourses];
+    	int step = 0;
     	for (int i = 0; i < prerequisites.length; i++) {
     		if (!p[prerequisites[i][0]][prerequisites[i][1]]) {
 				preNums[prerequisites[i][0]]++;
@@ -20,6 +22,7 @@ public class Solution {
     			if (preNums[i] == 0 && !visited[i]) {
     				visited[i] = true;
     				flag = true;
+    				result[step++] = i;
     				for (int j = 0; j < numCourses; j++) {
     					if (p[j][i]) {
     						p[j][i] = false;
@@ -33,9 +36,12 @@ public class Solution {
     		}
     	}
     	for (int i = 0; i < preNums.length; i++) {
-    		if (preNums[i] != 0) return false;
+    		if (preNums[i] != 0) return new int[]{};
     	}
-    	return true;
+    	for (int i = 0; i < visited.length; i++) {
+    		if (!visited[i]) result[step++] = i;
+    	}
+    	return result;
     }
 
     public static void main(String[] args) {
