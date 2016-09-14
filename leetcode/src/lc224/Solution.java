@@ -3,45 +3,81 @@ package lc224;
 import java.util.*;
 
 public class Solution {
-	public int maximalSquare(char[][] matrix) {
-		if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return 0;
-		int l0 = matrix.length, l1 = matrix[0].length;
-		int[] highs = new int[l1+2];
-		int max = 0;
-		for (int i = 0; i < l0; i++) {
-			for (int j = 0; j < l1; j++) {
-				if (matrix[i][j] == '1') {
-					highs[j+1]++;
-				} else {
-					highs[j+1] = 0;
-				}
-			}
-			int[] prevs = new int[l1+1];
-			int t = 0;
-			for (int j = 1; j < highs.length; j++) {
-				while (t > 0 && highs[prevs[t]] >= highs[j]) {
-					int a = Math.min(highs[prevs[t]], (j-prevs[t-1]-1));
-					max = Math.max(a*a, max);
-					t--;
-				}
-				prevs[++t] = j;
-			}
-		}
-		return max;
-	}
+    public int calculate(String s) {
+    	Stack<Character> stack0 = new Stack<Character>();
+    	Stack<String> stack1 = new Stack<String>();
+    	int step = 0;
+    	char[] cs = s.toCharArray();
+    	boolean isFirst = true;
+    	boolean isNeg = false;
+    	while (step < cs.length) {
+    		if (cs[step] >= '0' && cs[step] <= '9') {
+    			int step1 = step;
+    			while (step1<cs.length && cs[step1] >= '0' && cs[step1] <= '9') step1++;
+    			stack1.push(s.substring(step, step1));
+    			step = step1;
+    		} else if (cs[step] == '-' || cs[step] == '+') {
+    			if (isFirst) {
+    				isFirst = false;
+    				stack1.push("0");
+    			}
+    			while (stack0.size() > 0 && (stack0.peek() == '-' || stack0.peek() == '+')) {
+    				stack1.push(Character.toString(stack0.pop()));
+    			}
+    			stack0.push(cs[step]);
+    			step++;
+    		} else if (cs[step] == '*' || cs[step] == '/') {
+    			while (stack0.size() > 0 && (stack0.peek() == '-' || stack0.peek() == '+' || stack0.peek() == '*' || stack0.peek() == '/')) {
+    				stack1.push(Character.toString(stack0.pop()));
+    			}
+    			stack0.push(cs[step]);
+    			step++;
+    		} else if (cs[step] == '(') {
+    			stack0.push(cs[step]);
+    			step++;
+    			isFirst = true;
+    		} else if (cs[step] == ')') {
+    			while (stack0.size() > 0 && (stack0.peek() != '(')) {
+    				stack1.push(Character.toString(stack0.pop()));
+    			}
+    			stack0.pop();
+    			step++;
+    		} else {
+    			step++;
+    		}
+    	}
+    	while (stack0.size() > 0) {
+    		stack1.push(Character.toString(stack0.pop()));
+    	}
+    	Integer result = null;
+    	while (stack1.size() > 0) {
+    		String top = stack1.pop();
+    		if (top.equals("*") || 
+    			top.equals("/") ||
+    			top.equals("+") ||
+    			top.equals("-")) {
+    			stack0.push(top.toCharArray()[0]);
+    		} else {
+    			if (result == null) {
+    				result = Integer.parseInt(top);
+    			} else {
+					char top0 = stack0.pop();
+					Integer cur = Integer.parseInt(top);
+					if (top0 == '+') {
+						result += cur;
+					} else if (top0 == '-') {
+						result -= cur;
+					} else if (top0 == '/') {
+						result /= cur;
+					} else if (top0 == '*') {
+						result *= cur;
+					}
+    			}
+    		}
+    	}
+    	return result;
+    }
 
     public static void main(String[] args) {
-		Solution solution = new Solution();
-		String[] ss = new String[] { "10011011", "10000100", "01110011", "00010001", "00000111", "01111111", "10010110",
-				"01101110" };
-		char[][] a = new char[ss.length][ss[0].length()];
-		for (int i = 0; i < ss.length; i++) {
-			a[i] = ss[i].toCharArray();
-		}
-		System.out.println(solution.maximalSquare(a));
-		//    	System.out.println(solution.maximalSquare(new char[][]{{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '1', '0', '0'}}));
-//    	System.out.println(solution.maximalSquare(new char[][]{{'0'}}));
-//    	System.out.println(solution.maximalSquare(new char[][]{{'1', '0', '1', '0'}, {'1', '0', '1', '1'}, {'1', '0', '1', '1'}, {'1', '1', '1', '1'}}));
-//    	System.out.println(solution.maximalSquare(new char[][]{{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '1', '0', '0'}}));
     }
 }
