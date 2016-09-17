@@ -12,14 +12,14 @@ class MyQueue {
     // Removes the element from in front of queue.
     public void pop() {
         if (list.size() > 0) {
-        	list.remove(list.size()-1);
+        	list.remove(0);
         }
     }
 
     // Get the front element.
     public int peek() {
         if (list.size() > 0) {
-        	return list.get(list.size()-1);
+        	return list.get(0);
         } else {
         	return 0;
         }

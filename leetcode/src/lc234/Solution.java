@@ -5,14 +5,16 @@ import java.util.*;
 
 public class Solution {
     public boolean isPalindrome(ListNode head) {
-        if (head == null) return false;
+        if (head == null) return true;
         int count = 0;
-        while (head != null) {
-        	head = head.next;
+        ListNode p = head;
+        while (p != null) {
+        	p = p.next;
         	count++;
         }
+        if (count == 1) return true;
         int m = count/2;
-        ListNode p = head;
+        p = head;
         while (m > 0) {
         	p = p.next;
         	m--;
@@ -32,6 +34,7 @@ public class Solution {
         }
         q = head;
         int step = 0;
+        m = count/2;
         while (q.val == p.val) {
         	q = q.next;
         	p = p.next;
