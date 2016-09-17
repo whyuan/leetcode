@@ -1,47 +1,35 @@
-package lc227;
+package lc241;
 
 import java.util.*;
-
 public class Solution {
-	public int maximalSquare(char[][] matrix) {
-		if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return 0;
-		int l0 = matrix.length, l1 = matrix[0].length;
-		int[] highs = new int[l1+2];
-		int max = 0;
-		for (int i = 0; i < l0; i++) {
-			for (int j = 0; j < l1; j++) {
-				if (matrix[i][j] == '1') {
-					highs[j+1]++;
-				} else {
-					highs[j+1] = 0;
-				}
-			}
-			int[] prevs = new int[l1+1];
-			int t = 0;
-			for (int j = 1; j < highs.length; j++) {
-				while (t > 0 && highs[prevs[t]] >= highs[j]) {
-					int a = Math.min(highs[prevs[t]], (j-prevs[t-1]-1));
-					max = Math.max(a*a, max);
-					t--;
-				}
-				prevs[++t] = j;
-			}
-		}
-		return max;
+    public List<Integer> diffWaysToCompute(String input) {
+	List<Integer> result = new ArrayList<Integer>();
+	if (input == null || input.equals("")) return result;
+	if (!(input.contains("+") || input.contains("-") || input.contains("*"))) {
+	    int a = Integer.parseInt(input);
+	    result.add(a);
 	}
+	for (int i = 0; i < input.length(); i++) {
+	    if (input.charAt(i) == '+' || input.charAt(i) == '-' || input.charAt(i) == '*') {
+		List<Integer> list0 = diffWaysToCompute(input.substring(0, i));
+		List<Integer> list1 = diffWaysToCompute(input.substring(i+1, input.length()));
+		for (int j = 0; j < list0.size(); j++) {
+	            for (int k = 0; k < list1.size(); k++) {
+			if (input.charAt(i) == '+') {
+			    result.add(list0.get(j)+list1.get(k));
+			} else if (input.charAt(i) == '-') {
+			    result.add(list0.get(j)-list1.get(k));
+			} else {
+			    result.add(list0.get(j)*list1.get(k));
+			}
+		    }
+		}
+	    }
+	}
+	return result;
+    }
 
     public static void main(String[] args) {
-		Solution solution = new Solution();
-		String[] ss = new String[] { "10011011", "10000100", "01110011", "00010001", "00000111", "01111111", "10010110",
-				"01101110" };
-		char[][] a = new char[ss.length][ss[0].length()];
-		for (int i = 0; i < ss.length; i++) {
-			a[i] = ss[i].toCharArray();
-		}
-		System.out.println(solution.maximalSquare(a));
-		//    	System.out.println(solution.maximalSquare(new char[][]{{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '1', '0', '0'}}));
-//    	System.out.println(solution.maximalSquare(new char[][]{{'0'}}));
-//    	System.out.println(solution.maximalSquare(new char[][]{{'1', '0', '1', '0'}, {'1', '0', '1', '1'}, {'1', '0', '1', '1'}, {'1', '1', '1', '1'}}));
-//    	System.out.println(solution.maximalSquare(new char[][]{{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '1', '0', '0'}}));
+        Solution solution = new Solution();
     }
 }
