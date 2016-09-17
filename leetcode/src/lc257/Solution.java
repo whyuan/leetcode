@@ -1,5 +1,6 @@
-package lc227;
+package lc257;
 
+import common.TreeNode;
 import java.util.*;
 
 public class Solution {

@@ -3,45 +3,39 @@ package lc239;
 import java.util.*;
 
 public class Solution {
-	public int maximalSquare(char[][] matrix) {
-		if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return 0;
-		int l0 = matrix.length, l1 = matrix[0].length;
-		int[] highs = new int[l1+2];
-		int max = 0;
-		for (int i = 0; i < l0; i++) {
-			for (int j = 0; j < l1; j++) {
-				if (matrix[i][j] == '1') {
-					highs[j+1]++;
-				} else {
-					highs[j+1] = 0;
-				}
-			}
-			int[] prevs = new int[l1+1];
-			int t = 0;
-			for (int j = 1; j < highs.length; j++) {
-				while (t > 0 && highs[prevs[t]] >= highs[j]) {
-					int a = Math.min(highs[prevs[t]], (j-prevs[t-1]-1));
-					max = Math.max(a*a, max);
-					t--;
-				}
-				prevs[++t] = j;
-			}
-		}
-		return max;
-	}
+    public int[] maxSlidingWindow(int[] nums, int k) {
+    	if (nums == null) return null;
+    	int[] result = new int[nums.length-k+1];
+        if (k == 0 || nums.length == 0) return new int[]{};
+        List<Integer> pos = new ArrayList<Integer>();
+        for (int i = 0; i < k; i++) {
+        	if (pos.size() == 0) {
+        		pos.add(i);
+        	} else {
+        		pos = this.add(pos, i, k, nums);
+        	}
+        }
+        result[0] = nums[pos.get(0)];
+        for (int i = k; i < nums.length; i++) {
+        	if (pos.get(0) == i-k) {
+        		pos.remove(0);
+        	}
+        	pos = this.add(pos, i, k, nums);
+        	result[i-k+1] = nums[pos.get(0)];
+        }
+        return result;
+    }
+    
+    private List<Integer> add(List<Integer> pos, int p, int k, int[] nums) {
+    	while (!pos.isEmpty() && nums[pos.get(pos.size()-1)] <= nums[p]) {
+    		pos.remove(pos.size()-1);
+    	}
+    	pos.add(p);
+		return pos;
+    }
 
     public static void main(String[] args) {
 		Solution solution = new Solution();
-		String[] ss = new String[] { "10011011", "10000100", "01110011", "00010001", "00000111", "01111111", "10010110",
-				"01101110" };
-		char[][] a = new char[ss.length][ss[0].length()];
-		for (int i = 0; i < ss.length; i++) {
-			a[i] = ss[i].toCharArray();
-		}
-		System.out.println(solution.maximalSquare(a));
-		//    	System.out.println(solution.maximalSquare(new char[][]{{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '1', '0', '0'}}));
-//    	System.out.println(solution.maximalSquare(new char[][]{{'0'}}));
-//    	System.out.println(solution.maximalSquare(new char[][]{{'1', '0', '1', '0'}, {'1', '0', '1', '1'}, {'1', '0', '1', '1'}, {'1', '1', '1', '1'}}));
-//    	System.out.println(solution.maximalSquare(new char[][]{{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '1', '0', '0'}}));
+		System.out.println(solution.maxSlidingWindow(new int[]{7,2,4}, 2));
     }
 }
