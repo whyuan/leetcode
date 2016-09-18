@@ -1,6 +1,10 @@
-package lc227;
+package lc278;
 
 import java.util.*;
+
+class VersionControl {
+	public boolean isBadVersion(int a ){ return false; }
+}
 
 public class Solution extends VersionControl{
     public int firstBadVersion(int n) {

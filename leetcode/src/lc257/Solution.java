@@ -3,6 +3,8 @@ package lc257;
 import common.TreeNode;
 import java.util.*;
 
+import common.TreeNode;
+
 public class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
 	if (root == null) return new ArrayList<String>();
