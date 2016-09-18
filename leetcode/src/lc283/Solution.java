@@ -1,4 +1,4 @@
-package lc227;
+package lc283;
 
 import java.util.*;
 

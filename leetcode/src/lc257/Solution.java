@@ -1,6 +1,8 @@
-package lc227;
+package lc257;
 
 import java.util.*;
+
+import common.TreeNode;
 
 public class Solution {
     public List<String> binaryTreePaths(TreeNode root) {

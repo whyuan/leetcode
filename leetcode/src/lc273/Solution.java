@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Solution {
 	private String[] words2 = new String[]{"Thousand", "Million", "Billion"};
-	private String[] words0 = new String[]{"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Forteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+	private String[] words0 = new String[]{"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
 	public String numberToWords(int num) {
 		if (num == 0) return words0[0];
 		int step = 0;
@@ -27,7 +27,9 @@ public class Solution {
 			if (step == 0) {
 				result = cur.trim();
 			} else {
-				result = (cur + " " + words2[step-1] + " " + result).trim();
+				if (!cur.trim().equals("")) {
+					result = (cur + " " + words2[step-1] + " " + result).trim();
+				}
 			}
 			step++;
 		}
