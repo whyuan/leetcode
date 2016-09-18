@@ -16,7 +16,6 @@ public class Solution {
     	while (true) {
     		p0 = nums[p0];
     		p1 = nums[p1];
-    		p1 = nums[p1];
     		if (p0 == p1) break;
     	}
     	return p0;
