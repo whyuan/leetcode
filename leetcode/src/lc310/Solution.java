@@ -1,33 +1,35 @@
-package lc301;
+package lc310;
 
 import java.util.*;
 
 public class Solution {
-    public List<String> removeInvalidParentheses(String s) {
-    	if (s == null) return null;
-    	List<String> result = new ArrayList<String>();
-        removeInvalidParentheses(s, result, 0, 0, new char[]{'(', ')'});
-        return result;
-    }
-    
-    private void removeInvalidParentheses(String s, List<String> result, int lastI, int lastJ, char[] ws) {
-    	for (int i = lastI, stack = 0; i < s.length(); i++) {
-    		if (s.charAt(i) == ws[0]) stack++;
-    		if (s.charAt(i) == ws[1]) stack--;
-    		if (stack >= 0) continue;
-    		for (int j = lastJ; j <= i; j++) {
-    			if (s.charAt(j) == ws[1] && (j == lastJ || s.charAt(j-1) != ws[1])) {
-    				removeInvalidParentheses(s.substring(0, j)+s.substring(j+1, s.length()), result, i, j, ws);
-    			}
-    		}
-    		return;
-    	}
-    	String reverse = (new StringBuilder(s)).reverse().toString();
-    	if (ws[0] == '(') {
-    		removeInvalidParentheses(reverse, result, 0, 0, new char[]{')', '('});
-    	} else {
-    		result.add(reverse);
-    	}
+    public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+    	if (n == 1) return Collections.singletonList(0);
+        List<Set<Integer>> nodes = new ArrayList<Set<Integer>>(n);
+        for (int i = 0; i < n; i++) {
+        	nodes.add(new HashSet<Integer>());
+        }
+        for (int i = 0; i < edges.length; i++) {
+        	nodes.get(edges[i][0]).add(edges[i][1]);
+        	nodes.get(edges[i][1]).add(edges[i][0]);
+        }
+        List<Integer> leaves = new ArrayList<Integer>();
+        for (int i = 0; i < n; i++) {
+        	if (nodes.get(i).size() == 1) {
+        		leaves.add(i);
+        	}
+        }
+        while (n > 2) {
+        	n -= leaves.size();
+        	List<Integer> newLeaves = new ArrayList<Integer>();
+        	for (int i = 0; i < leaves.size(); i++) {
+        		int j = nodes.get(leaves.get(i)).iterator().next();
+        		nodes.get(j).remove(leaves.get(i));
+        		if (nodes.get(j).size() == 1) newLeaves.add(j);
+        	}
+        	leaves = newLeaves;
+        }
+        return leaves;
     }
 
     public static void main(String[] args) {
