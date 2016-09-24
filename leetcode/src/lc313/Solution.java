@@ -1,33 +1,26 @@
-package lc301;
+package lc313;
 
 import java.util.*;
 
 public class Solution {
-    public List<String> removeInvalidParentheses(String s) {
-    	if (s == null) return null;
-    	List<String> result = new ArrayList<String>();
-        removeInvalidParentheses(s, result, 0, 0, new char[]{'(', ')'});
-        return result;
-    }
-    
-    private void removeInvalidParentheses(String s, List<String> result, int lastI, int lastJ, char[] ws) {
-    	for (int i = lastI, stack = 0; i < s.length(); i++) {
-    		if (s.charAt(i) == ws[0]) stack++;
-    		if (s.charAt(i) == ws[1]) stack--;
-    		if (stack >= 0) continue;
-    		for (int j = lastJ; j <= i; j++) {
-    			if (s.charAt(j) == ws[1] && (j == lastJ || s.charAt(j-1) != ws[1])) {
-    				removeInvalidParentheses(s.substring(0, j)+s.substring(j+1, s.length()), result, i, j, ws);
-    			}
-    		}
-    		return;
-    	}
-    	String reverse = (new StringBuilder(s)).reverse().toString();
-    	if (ws[0] == '(') {
-    		removeInvalidParentheses(reverse, result, 0, 0, new char[]{')', '('});
-    	} else {
-    		result.add(reverse);
-    	}
+    public int nthSuperUglyNumber(int n, int[] primes) {
+        if (n == 0 || primes == null || primes.length == 0) return 0;
+        int[] a = new int[n];
+        int[] p = new int[primes.length];
+        a[0] = 1;
+        for (int i = 1; i < n; i++) {
+        	int min = 0;
+        	for (int j = 0; j < primes.length; j++) {
+        		if (min == 0 || a[p[j]]*primes[j] < min) {
+        			min = a[p[j]]*primes[j];
+        		}
+        	}
+        	for (int j = 0; j < primes.length; j++) {
+        		if (min == a[p[j]]*primes[j]) p[j]++;
+        	}
+        	a[i] = min;
+        }
+        return a[n-1];
     }
 
     public static void main(String[] args) {
