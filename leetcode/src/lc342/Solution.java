@@ -1,4 +1,4 @@
-package lc326;
+package lc342;
 
 import java.util.*;
 
@@ -10,5 +10,10 @@ public class Solution {
 
     public static void main(String[] args) {
     	Solution solution = new Solution();
+    	int i = 1;
+    	while (i > 0) {
+    		i = i*4;
+    		System.out.println(i);
+    	}
     }
 }
