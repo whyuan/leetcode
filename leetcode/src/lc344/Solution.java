@@ -9,10 +9,10 @@ public class Solution {
     	int l = cs.length/2;
     	for (int i = 0; i < l; i++) {
     		char c = cs[i];
-    		cs[i] = cs[cs.length-i];
-    		cs[cs.length-i] = c;
+    		cs[i] = cs[cs.length-i-1];
+    		cs[cs.length-i-1] = c;
     	}
-    	return cs.toString();
+    	return new String(cs);
     }
 
     public static void main(String[] args) {
