@@ -18,7 +18,7 @@ public class Solution {
     	int[] result = new int[resultSet.size()];
     	int i = 0;
     	for (Integer num : resultSet) {
-    		result[i++] num;
+    		result[i++] = num;
     	}
     	return result;
     }
