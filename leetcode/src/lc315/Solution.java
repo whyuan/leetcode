@@ -1,32 +1,43 @@
-package lc301;
+package lc315;
 
 import java.util.*;
 
 public class Solution {
-    public List<String> removeInvalidParentheses(String s) {
-    	if (s == null) return null;
-    	List<String> result = new ArrayList<String>();
-        removeInvalidParentheses(s, result, 0, 0, new char[]{'(', ')'});
+
+    public List<Integer> countSmaller(int[] nums) {
+        if (nums.length == 0) return new ArrayList<Integer>();
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+        	min = nums[i]<min?nums[i]:min;
+        }
+        int[] nums1 = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+        	nums1[i] = nums[i]-min+1;
+        	max = nums1[i]>max?nums1[i]:max;
+        }
+        int[] tree = new int[max+1];
+        List<Integer> result = new ArrayList<Integer>();
+        for (int i = nums1.length-1; i >= 0; i--) {
+        	result.add(0, get(nums1[i]-1, tree));
+        	update(nums1[i], tree);
+        }
         return result;
     }
     
-    private void removeInvalidParentheses(String s, List<String> result, int lastI, int lastJ, char[] ws) {
-    	for (int i = lastI, stack = 0; i < s.length(); i++) {
-    		if (s.charAt(i) == ws[0]) stack++;
-    		if (s.charAt(i) == ws[1]) stack--;
-    		if (stack >= 0) continue;
-    		for (int j = lastJ; j <= i; j++) {
-    			if (s.charAt(j) == ws[1] && (j == lastJ || s.charAt(j-1) != ws[1])) {
-    				removeInvalidParentheses(s.substring(0, j)+s.substring(j+1, s.length()), result, i, j, ws);
-    			}
-    		}
-    		return;
+    private int get(int i, int[] tree) {
+    	int result = 0;
+    	while (i > 0) {
+    		result += tree[i];
+    		i -= (i&(-i));
     	}
-    	String reverse = (new StringBuilder(s)).reverse().toString();
-    	if (ws[0] == '(') {
-    		removeInvalidParentheses(reverse, result, 0, 0, new char[]{')', '('});
-    	} else {
-    		result.add(reverse);
+    	return result;
+    }
+    
+    private void update(int i, int[] tree) {
+    	while (i < tree.length) {
+    		tree[i]++;
+    		i += (i&(-i));
     	}
     }
 

@@ -1,33 +1,27 @@
-package lc301;
+package lc312;
 
 import java.util.*;
 
 public class Solution {
-    public List<String> removeInvalidParentheses(String s) {
-    	if (s == null) return null;
-    	List<String> result = new ArrayList<String>();
-        removeInvalidParentheses(s, result, 0, 0, new char[]{'(', ')'});
-        return result;
-    }
-    
-    private void removeInvalidParentheses(String s, List<String> result, int lastI, int lastJ, char[] ws) {
-    	for (int i = lastI, stack = 0; i < s.length(); i++) {
-    		if (s.charAt(i) == ws[0]) stack++;
-    		if (s.charAt(i) == ws[1]) stack--;
-    		if (stack >= 0) continue;
-    		for (int j = lastJ; j <= i; j++) {
-    			if (s.charAt(j) == ws[1] && (j == lastJ || s.charAt(j-1) != ws[1])) {
-    				removeInvalidParentheses(s.substring(0, j)+s.substring(j+1, s.length()), result, i, j, ws);
+    public int maxCoins(int[] nums) {
+    	int[] nums1 = new int[nums.length+2];
+    	int n = 1;
+    	for (int i = 0; i < nums.length; i++) {
+    		if (nums[i] > 0) {
+    			nums1[n++] = nums[i];
+    		}
+    	}
+    	nums1[0] = nums1[n++] = 1;
+    	int[][] f = new int[n][n];
+    	for (int k = 2; k < n; k++) {
+    		for (int left = 0; left < n-k; left++) {
+    			int right = left+k;
+    			for (int i = left+1; i < right; i++) {
+    				f[left][right] = Math.max(f[left][right], f[left][i]+f[i][right]+nums1[left]*nums1[i]*nums1[right]);
     			}
     		}
-    		return;
     	}
-    	String reverse = (new StringBuilder(s)).reverse().toString();
-    	if (ws[0] == '(') {
-    		removeInvalidParentheses(reverse, result, 0, 0, new char[]{')', '('});
-    	} else {
-    		result.add(reverse);
-    	}
+    	return f[0][n-1];
     }
 
     public static void main(String[] args) {
