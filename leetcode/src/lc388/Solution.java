@@ -8,7 +8,11 @@ public class Solution {
     	if (input == null || input.length() == 0) return 0;
     	char[] cs = input.toCharArray();
     	step = 0;
-    	return doGetLengthLongestPath(cs, 0);
+    	int max = 0;
+    	while (step < cs.length) {
+    		max = Math.max(max, doGetLengthLongestPath(cs, 0));
+    	}
+    	return max;
     }
     
     private int step;
@@ -26,7 +30,7 @@ public class Solution {
     		return l;
     	} else {
     		int max = 0;
-    		while (step < cs.length && cs[step] == '\n') {
+    		while (step < cs.length) {
     			int l0 = 0;
     			int step0 = step;
     			while (step0 < cs.length && cs[step0] == '\n') step0++;
